@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useLocation } from 'react-router';
 
-function App() {
+import Footer from './components/Layout/Footer';
+import Header from './components/Layout/Header';
+import MenuLeft from './components/Layout/MenuLeft';
+import MenuLeftAccount from './components/Layout/MenuLeftAccount';
+import Carousel from './components/Layout/Carousel';
+import { GlobalProvider } from './context/GlobalContext';
+
+function App({ children }) {
+  let params = useLocation();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalProvider>
+        <Header />
+        {params.pathname === '/' && <Carousel />}
+        <section>
+          <div className="container">
+            <div className="row">
+              {params.pathname.includes('account') ? (
+                <MenuLeftAccount />
+              ) : (
+                params.pathname !== '/product/cart' && <MenuLeft />
+              )}
+
+              {children}
+            </div>
+          </div>
+        </section>
+        <Footer />
+      </GlobalProvider>
+    </>
   );
 }
 

@@ -1,0 +1,10 @@
+.sale {
+  min-width: 80px;
+  height: 50px;
+  padding: 5px;
+  line-height: 40px;
+  text-align: center;
+  background-color: red;
+  color: #fff !important;
+  font-size: medium;
+}
